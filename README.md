@@ -4,7 +4,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-See instructions. Delete this line and place the Product Vision Statement here.
+Our goal is to create a centralized lost and found app for users to report losing certain items, report the discovery of lost items, share information about lost items, and claim lost items.
 
 ## User stories
 
