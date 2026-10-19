@@ -11,11 +11,11 @@
     <body>
         <div class="add-post">
             <header class="add-post-header">
-                <a href="home.html" class="back-button">&larr; Back</a>
+                <a href="{{ url_for('home') }}" class="back-button">&larr; Back</a>
                 <h1 class="white">Add a post</h1>
             </header>
 
-            <form class="post-info" action="home.html" method="GET">
+            <form class="post-info" action="{{ url_for('post') }}" method="POST">
                 <label for="post-title">Post title:</label>
                 <input type="text" id="post-title" name="title" placeholder="Title">
 
