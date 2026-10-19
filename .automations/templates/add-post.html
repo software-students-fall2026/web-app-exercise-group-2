@@ -9,19 +9,24 @@
     </head>
 
     <body>
-        <h1 class="white">Add a post</h1>
+        <div class="add-post">
+            <header class="add-post-header">
+                <a href="home.html" class="back-button">&larr; Back</a>
+                <h1 class="white">Add a post</h1>
+            </header>
 
-        <form class="post-info">
-            <label for="post-title">Post title:</label>
-            <input type="text" id="post-title" placeholder="Title">
+            <form class="post-info" action="home.html" method="GET">
+                <label for="post-title">Post title:</label>
+                <input type="text" id="post-title" name="title" placeholder="Title">
 
-            <label for="item-desc">Item description:</label>
-            <input type="text" id="item-desc" placeholder="Description">
+                <label for="item-desc">Item description:</label>
+                <input type="text" id="item-desc" name="description" placeholder="Description">
 
-            <label for="last-seen">Last seen:</label>
-            <input type="text" id="last-seen" placeholder="Location/Date">
+                <label for="last-seen">Last seen:</label>
+                <input type="text" id="last-seen" name="last_seen" placeholder="Location/Date">
 
-            <button type="submit">Post</button>
-        </form>
+                <button type="submit" class="submit-button">Post</button>
+            </form>
+        </div>
     </body>
 </html>
