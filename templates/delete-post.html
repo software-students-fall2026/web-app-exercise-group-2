@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Delete post | Lost and Found</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <main class="add-post">
+            <header class="add-post-header">
+                <a href="{{ url_for('home') }}" class="back-button">&larr; Back</a>
+                <h1 class="white">Delete post?</h1>
+            </header>
+            <section class="post-card" aria-labelledby="confirm-delete">
+                <h2 id="confirm-delete">Are you sure?</h2>
+                <p>This will permanently delete “{{ post.title }}”.</p>
+                <form method="POST" action="{{ url_for('delete_post', post_id=post_id) }}" class="confirm-actions">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="submit-button danger-button">Delete</button>
+                    <a class="action-button" href="{{ url_for('home') }}">Cancel</a>
+                </form>
+            </section>
+        </main>
+    </body>
+</html>
