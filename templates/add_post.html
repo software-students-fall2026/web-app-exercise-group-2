@@ -15,15 +15,17 @@
                 <h1 class="white">Add a post</h1>
             </header>
 
-            <form class="post-info" action="{{ url_for('post') }}" method="POST">
+            {% if error %}<p class="form-error" role="alert">{{ error }}</p>{% endif %}
+            <form class="post-info" action="{{ url_for('create_post') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <label for="post-title">Post title:</label>
-                <input type="text" id="post-title" name="title" placeholder="Title">
+                <input type="text" id="post-title" name="title" placeholder="Title" value="{{ post.get('title', '') }}" required>
 
                 <label for="item-desc">Item description:</label>
-                <input type="text" id="item-desc" name="description" placeholder="Description">
+                <textarea id="item-desc" name="description" placeholder="Description" required>{{ post.get('description', '') }}</textarea>
 
                 <label for="last-seen">Last seen:</label>
-                <input type="text" id="last-seen" name="last_seen" placeholder="Location/Date">
+                <input type="text" id="last-seen" name="last_seen" placeholder="Location/Date" value="{{ post.get('last_seen', '') }}" required>
 
                 <button type="submit" class="submit-button">Post</button>
             </form>
