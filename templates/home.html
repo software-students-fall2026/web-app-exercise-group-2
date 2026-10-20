@@ -1,36 +1,50 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lost and Found</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="/static/style.css">
     </head>
+
     <body>
         <div class="home">
             <header class="home-header">
                 <h1 class="white">Lost and Found</h1>
-                <a href="{{ url_for('add_post') }}" class="add-post-button">+ Add post</a>
+                <a href="add-post.html" class="add-post-button">+ Add post</a>
             </header>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% for category, message in messages %}<p class="notice {{ category }}" role="status">{{ message }}</p>{% endfor %}
-            {% endwith %}
+
             <main class="post-feed">
-                {% for post in posts %}
-                    <article class="post-card">
-                        <h2>{{ post.title }}</h2>
-                        <p>{{ post.description }}</p>
-                        <p class="last-seen">Last seen: {{ post.last_seen }}</p>
-                        {% if owner_id and post.get('owner_id') == owner_id %}
-                            <div class="post-actions">
-                                <a class="action-button" href="{{ url_for('edit_post', post_id=post.id) }}">Edit</a>
-                                <a class="action-button delete-link" href="{{ url_for('delete_post', post_id=post.id) }}">Delete</a>
-                            </div>
-                        {% endif %}
-                    </article>
-                {% else %}
-                    <p class="empty-state">No posts yet. Add a post to help reunite an item with its owner.</p>
-                {% endfor %}
+                <article class="post-card">
+                    <h2>Black backpack</h2>
+                    <p>North Face backpack with a laptop inside.</p>
+                    <p class="last-seen">Last seen: Bobst Library, Oct 17</p>
+                </article>
+
+                <article class="post-card">
+                    <h2>Silver keys</h2>
+                    <p>Three keys on a red lanyard.</p>
+                    <p class="last-seen">Last seen: Washington Square Park, Oct 16</p>
+                </article>
+
+                <article class="post-card">
+                    <h2>AirPods case</h2>
+                    <p>White case with a small scratch on the lid.</p>
+                    <p class="last-seen">Last seen: Kimmel Center, Oct 15</p>
+                </article>
+
+                <article class="post-card">
+                    <h2>Blue water bottle</h2>
+                    <p>Hydro Flask with stickers on it.</p>
+                    <p class="last-seen">Last seen: Paulson Center, Oct 14</p>
+                </article>
+
+                <article class="post-card">
+                    <h2>Student ID</h2>
+                    <p>NYU ID card in a clear holder.</p>
+                    <p class="last-seen">Last seen: Silver Center, Oct 13</p>
+                </article>
             </main>
         </div>
     </body>
