@@ -1,5 +1,4 @@
 import os
-
 from dotenv import load_dotenv
 from email_validator import validate_email, EmailNotValidError
 from flask import Flask, redirect, render_template, request, url_for
@@ -7,6 +6,7 @@ from flask_wtf.csrf import CSRFProtect
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
 from werkzeug.security import generate_password_hash
+from bson.objectid import ObjectId
 
 load_dotenv()
 
@@ -21,7 +21,7 @@ client = MongoClient(
     serverSelectionTimeoutMS=5000
 )
 
-db = client[os.environ["MONGO_DB"]]
+db = client[os.environ["MONGO_DBNAME"]]
 users = db["users"]
 
 users.create_index("email", unique=True)
@@ -74,3 +74,28 @@ def signup():
                 error = "An account with this email already exists."
 
     return render_template("signup.html", error=error)
+
+@app.route("/home")
+def home():
+    return render_template("home.html")
+
+@app.route("/add_post")
+def add_post():
+    return render_template("add_post.html")
+
+@app.route("/save", methods=['POST'])
+def post():
+    title = request.form["title"]
+    description = request.form["description"]
+    last_seen = request.form["last_seen"]
+
+    db.posts.insert_one({
+        "title": title,
+        "description": description,
+        "last_seen": last_seen
+    })
+
+    return redirect(url_for('home'))
+
+if __name__ == "__main__":
+    app.run(debug=True)
