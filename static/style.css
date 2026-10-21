@@ -16,6 +16,22 @@ body{
     gap:20px;
 }
 
+.post-info input, .post-info textarea{
+    box-sizing:border-box;
+    width:100%;
+    border:1px solid #ded9e2;
+    border-radius:10px;
+    padding:12px;
+    font:inherit;
+}
+
+.post-info textarea{min-height:120px;resize:vertical;}
+
+.post-info input:focus, .post-info textarea:focus{
+    outline:2px solid #c9a2e2;
+    outline-offset:2px;
+}
+
 /* Home page */
 .home{
     max-width:600px;
@@ -70,6 +86,34 @@ body{
     font-style:italic;
     margin-bottom:0;
 }
+
+.post-actions, .form-actions, .confirm-actions{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    margin-top:18px;
+}
+
+.action-button{
+    display:inline-block;
+    color:white;
+    text-decoration:none;
+    border:1px solid white;
+    border-radius:18px;
+    padding:9px 15px;
+    font:inherit;
+    cursor:pointer;
+}
+
+.action-button:hover{background:white;color:rgb(82,77,77);}
+.delete-link{border-color:#ffb9b9;color:#ffd6d6;}
+.delete-link:hover{background:#ffd6d6;color:#642020;}
+.danger-button{background:#8b2525;color:white;}
+.danger-button:hover{background:#a72e2e;color:white;}
+.form-error{color:#ffe1e1;background:#672929;border-radius:10px;padding:12px;}
+.notice{color:white;padding:10px 14px;border-radius:10px;background:#3c6b43;}
+.empty-state{color:white;padding:20px 4px;line-height:1.5;}
 
 /* Add post page */
 .add-post{
