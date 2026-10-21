@@ -15,7 +15,14 @@
         <h1>Join your community.</h1>
         <p class="intro">Help lost belongings find their way home.</p>
 
-        <form>
+        <form method="POST" action="{{ url_for('signup') }}">
+            <input type="hidden" name="csrf_token"
+                   value="{{ csrf_token() }}">
+
+            {% if error %}
+                <p role="alert">{{ error }}</p>
+            {% endif %}
+
             <label for="name">Full name</label>
             <input type="text" id="name" name="name"
                    autocomplete="name" required>
@@ -28,19 +35,21 @@
             <input type="password" id="password" name="password"
                    minlength="8" autocomplete="new-password"
                    aria-describedby="password-help" required>
-            <p id="password-help" class="form-note">Use at least 8 characters.</p>
+            <p id="password-help" class="form-note">
+                Use at least 8 characters.
+            </p>
 
             <label for="confirm_password">Confirm password</label>
             <input type="password" id="confirm_password"
                    name="confirm_password" minlength="8"
                    autocomplete="new-password" required>
 
-            <button type="submit" disabled>Create account</button>
-            <p class="form-note">Account creation is coming next.</p>
+            <button type="submit">Create account</button>
         </form>
 
         <p class="switch-page">
-            Already a member? <a href="{{ url_for('login') }}">Log in</a>
+            Already a member?
+            <a href="{{ url_for('login') }}">Log in</a>
         </p>
     </main>
 </body>

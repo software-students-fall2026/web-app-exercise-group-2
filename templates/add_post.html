@@ -16,6 +16,7 @@
             </header>
 
             <form class="post-info" action="{{ url_for('post') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <label for="post-title">Post title:</label>
                 <input type="text" id="post-title" name="title" placeholder="Title">
 
