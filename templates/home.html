@@ -12,39 +12,19 @@
         <div class="home">
             <header class="home-header">
                 <h1 class="white">Lost and Found</h1>
-                <a href="add-post.html" class="add-post-button">+ Add post</a>
+                <a href="{{ url_for('add_post') }}" class="add-post-button">+ Add post</a>
             </header>
 
             <main class="post-feed">
-                <article class="post-card">
-                    <h2>Black backpack</h2>
-                    <p>North Face backpack with a laptop inside.</p>
-                    <p class="last-seen">Last seen: Bobst Library, Oct 17</p>
-                </article>
-
-                <article class="post-card">
-                    <h2>Silver keys</h2>
-                    <p>Three keys on a red lanyard.</p>
-                    <p class="last-seen">Last seen: Washington Square Park, Oct 16</p>
-                </article>
-
-                <article class="post-card">
-                    <h2>AirPods case</h2>
-                    <p>White case with a small scratch on the lid.</p>
-                    <p class="last-seen">Last seen: Kimmel Center, Oct 15</p>
-                </article>
-
-                <article class="post-card">
-                    <h2>Blue water bottle</h2>
-                    <p>Hydro Flask with stickers on it.</p>
-                    <p class="last-seen">Last seen: Paulson Center, Oct 14</p>
-                </article>
-
-                <article class="post-card">
-                    <h2>Student ID</h2>
-                    <p>NYU ID card in a clear holder.</p>
-                    <p class="last-seen">Last seen: Silver Center, Oct 13</p>
-                </article>
+                {% for post in posts: %}
+                    <div class="post-card">
+                        <h2>{{ post.title }}</h2>
+                        <p>{{ post.description }}</p>
+                        <p class="last-seen">Last seen: {{ post.last_seen }}</p>
+                    </div>
+                {% else %}
+                    <p>No posts yet.</p>
+                {% endfor %}
             </main>
         </div>
     </body>

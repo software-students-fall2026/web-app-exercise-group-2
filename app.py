@@ -30,7 +30,8 @@ def signup():
 
 @app.route("/home")
 def home():
-    return render_template("home.html")
+    post = db.posts.find().sort("_id", -1)
+    return render_template("home.html", posts=post)
 
 @app.route("/add_post")
 def add_post():
