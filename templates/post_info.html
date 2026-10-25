@@ -32,7 +32,7 @@
                     </form>
                 {% endif %}
 
-                <form method="POST" action="{{ url_for('add_reply') }}" class="post-info">
+                <form method="POST" action="{{ url_for('add_reply', post_id=post._id) }}" class="post-info">
                     <label for="content">Reply Content:</label>
                     <input type="text" id="content" name="content">
 

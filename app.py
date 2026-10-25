@@ -136,19 +136,18 @@ def post_details(post_id):
     return render_template("post_info.html", post=post, replies=replies)
 
 
-@app.route("/add_reply", methods=["POST"])
+@app.route("/add_reply/<post_id>", methods=["POST"])
 @flask_login.login_required
-def add_reply():
+def add_reply(post_id):
     content = request.form["content"]
-    id = request.form["post_id"]
 
     db.replies.insert_one({
         "content": content,
-        "post_id": id,
+        "post_id": post_id,
         "user_id": str(flask_login.current_user.id)
     })
 
-    return redirect(url_for("post_details", post_id=id))
+    return redirect(url_for("post_details", post_id=post_id))
 
 @app.route("/edit/<post_id>", methods=["GET", "POST"])
 @flask_login.login_required
@@ -181,6 +180,17 @@ def delete(post_id):
     db.posts.delete_one({"_id": ObjectId(post_id)})
 
     return redirect(url_for("home"))
+
+@app.route("/search")
+@flask_login.login_required
+def search():
+    query = request.args.get("search")
+
+    posts = db.posts.find({
+        "title":{"$regex": query, "$options": "i"}
+    })
+
+    return render_template("home.html", posts=posts, search=query)
 
 if __name__ == "__main__":
     app.run(debug=True)

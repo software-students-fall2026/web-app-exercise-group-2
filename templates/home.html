@@ -17,6 +17,9 @@
             </header>
 
             <main class="post-feed">
+                <form action="{{ url_for('search')}}" method="GET">
+                    <input type="text" class="search-bar" name="search" placeholder="search" value="{{ search }}">
+                </form>
                 {% for post in posts: %}
                     <a href="{{ url_for('post_details', post_id=post._id) }}" class="view">
                         <div class="post-card">
