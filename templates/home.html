@@ -18,11 +18,13 @@
 
             <main class="post-feed">
                 {% for post in posts: %}
-                    <div class="post-card">
-                        <h2>{{ post.title }}</h2>
-                        <p>{{ post.description }}</p>
-                        <p class="last-seen">Last seen: {{ post.last_seen }}</p>
-                    </div>
+                    <a href="{{ url_for('post_details', post_id=post._id) }}" class="view">
+                        <div class="post-card">
+                            <h2>{{ post.title }}</h2>
+                            <p>{{ post.description }}</p>
+                            <p class="last-seen">Last seen: {{ post.last_seen }}</p>
+                        </div>
+                    </a>
                 {% else %}
                     <p>No posts yet.</p>
                 {% endfor %}

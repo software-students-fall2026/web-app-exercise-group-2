@@ -98,3 +98,16 @@ body{
 .submit-button:hover{
     background-color:rgb(220, 220, 220);
 }
+
+.view{
+    color:white;
+}
+
+.view:hover .post-card{
+    background-color:rgb(220, 220, 220);
+    cursor:pointer;
+}
+
+.details{
+    gap:20px;
+}

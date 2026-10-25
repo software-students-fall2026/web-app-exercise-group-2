@@ -127,5 +127,60 @@ def post():
 
     return redirect(url_for('home'))
 
+@app.route("/post/<post_id>")
+@flask_login.login_required
+def post_details(post_id):
+    post = db.posts.find_one({"_id": ObjectId(post_id)})
+    replies = db.replies.find({"post_id": post_id})
+
+    return render_template("post_info.html", post=post, replies=replies)
+
+
+@app.route("/add_reply", methods=["POST"])
+@flask_login.login_required
+def add_reply():
+    content = request.form["content"]
+    id = request.form["post_id"]
+
+    db.replies.insert_one({
+        "content": content,
+        "post_id": id,
+        "user_id": str(flask_login.current_user.id)
+    })
+
+    return redirect(url_for("post_details", post_id=id))
+
+@app.route("/edit/<post_id>", methods=["GET", "POST"])
+@flask_login.login_required
+def edit_post(post_id):
+    post = db.posts.find_one({"_id": ObjectId(post_id)})
+
+    if request.method == "POST":
+
+        title = request.form["title"]
+        description = request.form["description"]
+        last_seen = request.form["last_seen"]
+
+        db.posts.update_one(
+            {"_id":ObjectId(post_id)},
+            {"$set":{
+                "title": title,
+                "description": description,
+                "last_seen": last_seen
+            }}
+        )
+
+        return redirect(url_for("post_details", post_id=post_id))
+
+    return render_template("edit_post.html", post=post)
+
+@app.route("/delete_post/<post_id>", methods=["POST"])
+@flask_login.login_required
+def delete(post_id):
+    db.replies.delete_many({"post_id": post_id})
+    db.posts.delete_one({"_id": ObjectId(post_id)})
+
+    return redirect(url_for("home"))
+
 if __name__ == "__main__":
     app.run(debug=True)
