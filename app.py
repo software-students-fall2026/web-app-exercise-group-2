@@ -1,12 +1,11 @@
 import os
 import pymongo
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, abort, url_for, make_response
+from flask import Flask, render_template, request, redirect, url_for
 from bson.objectid import ObjectId
 import flask_login
 from werkzeug.security import generate_password_hash, check_password_hash
 from pymongo.errors import DuplicateKeyError
-import datetime
 
 load_dotenv()
 
@@ -23,7 +22,6 @@ users.create_index("email", unique = True)
 
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = "login"
 
 class User(flask_login.UserMixin):
     pass
