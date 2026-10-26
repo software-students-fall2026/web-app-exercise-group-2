@@ -262,3 +262,12 @@ a { color: var(--purple); }
     margin: 0;
     line-height: 1.6;
 }
+
+.form-error {
+    margin: 0 0 8px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fdecea;
+    color: #b42318;
+    font-size: 14px;
+}

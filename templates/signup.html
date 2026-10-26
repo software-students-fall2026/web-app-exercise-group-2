@@ -15,6 +15,10 @@
         <h1>Join your community.</h1>
         <p class="intro">Help lost belongings find their way home.</p>
 
+        {% if error %}
+            <p class="form-error">{{ error }}</p>
+        {% endif %}
+
         <form class="form" method="POST" action="{{ url_for('signup') }}">
             <label for="name">Full name</label>
             <input type="text" id="name" name="name"
@@ -34,9 +38,9 @@
             <input type="password" id="confirm_password"
                    name="confirm_password" minlength="8"
                    autocomplete="new-password" required>
+            <p class="form-note">Passwords must match.</p>
 
             <button type="submit" class="button">Create account</button>
-            <p class="form-note">Account creation is coming next.</p>
         </form>
 
         <p class="switch-page">

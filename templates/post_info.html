@@ -23,7 +23,7 @@
                 <p class="last-seen">Last seen: {{ post.last_seen }}</p>
             </div>
 
-            {% if post.user_id == current_user.id %}
+            {% if is_owner %}
                 <div class="post-actions">
                     <a href="{{ url_for('edit_post', post_id=post._id) }}" class="button button-outline">
                         Edit post
@@ -37,7 +37,8 @@
 
             <form method="POST" action="{{ url_for('add_reply', post_id=post._id) }}" class="card form">
                 <label for="content">Reply</label>
-                <input type="text" id="content" name="content">
+                <input type="text" id="content" name="content" required
+                pattern=".*\S.*" title="Reply can't be empty.">
 
                 <input type="hidden" name="post_id" value="{{ post._id }}">
 
@@ -45,13 +46,13 @@
             </form>
 
             <section class="post-feed">
-                <h2 class="section-title">Replies</h2>
+                <h2 class="section-title">{% if is_owner %}Replies{% else %}Your replies{% endif %}</h2>
                 {% for reply in replies: %}
                     <div class="card reply">
                         <p>{{ reply.content }}</p>
                     </div>
                 {% else %}
-                    <p class="empty">No replies yet.</p>
+                    {% if is_owner %}No replies yet.{% else %}Only you and the poster can see your replies.{% endif %}
                 {% endfor %}
             </section>
         </main>
