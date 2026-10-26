@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up | Lost & Found</title>
     <link rel="stylesheet"
-          href="{{ url_for('static', filename='auth.css') }}">
+          href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header class="site-header">Lost & Found</header>
+    <header class="site-header">NYU Lost & Found</header>
 
-    <main class="auth-card">
+    <main class="card auth-card">
         <span class="eyebrow">A LITTLE LOST. ALMOST FOUND.</span>
         <h1>Join your community.</h1>
         <p class="intro">Help lost belongings find their way home.</p>
 
-        <form method="POST" action="{{ url_for('signup') }}">
+        {% if error %}
+            <p class="form-error">{{ error }}</p>
+        {% endif %}
+
+        <form class="form" method="POST" action="{{ url_for('signup') }}">
             <label for="name">Full name</label>
             <input type="text" id="name" name="name"
                    autocomplete="name" required>
@@ -34,9 +38,9 @@
             <input type="password" id="confirm_password"
                    name="confirm_password" minlength="8"
                    autocomplete="new-password" required>
+            <p class="form-note">Passwords must match.</p>
 
-            <button type="submit">Create account</button>
-            <p class="form-note">Account creation is coming next.</p>
+            <button type="submit" class="button">Create account</button>
         </form>
 
         <p class="switch-page">

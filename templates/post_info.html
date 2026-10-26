@@ -5,52 +5,56 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ post.title }}</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
 
     <body>
-        <div class="home">
-            <header class="home-header">
-                <h1 class="white">Lost and Found</h1>
-                <a href="{{ url_for('home') }}" class="back-button">Back</a>
-            </header>
+        <header class="site-header">
+            <span>NYU Lost & Found</span>
+            <nav class="header-actions">
+                <a href="{{ url_for('home') }}" class="header-button">&larr; Back</a>
+            </nav>
+        </header>
 
-            <div class="details">
-                <div class="post-card">
-                    <h2>{{ post.title }}</h2>
-                    <p>{{ post.description }}</p>
-                    <p class="last-seen">Last seen: {{ post.last_seen }}</p>
-                </div>
+        <main class="page details">
+            <div class="card post-card">
+                <h2>{{ post.title }}</h2>
+                <p>{{ post.description }}</p>
+                <p class="last-seen">Last seen: {{ post.last_seen }}</p>
+            </div>
 
-                {% if post.user_id == current_user.id %}
-                    <a href="{{ url_for('edit_post', post_id=post._id) }}" class="back-button">
+            {% if is_owner %}
+                <div class="post-actions">
+                    <a href="{{ url_for('edit_post', post_id=post._id) }}" class="button button-outline">
                         Edit post
                     </a>
 
                     <form method="POST" action="{{ url_for('delete', post_id=post._id)}}">
-                        <button type="submit" class="submit-button">Delete post</button>
+                        <button type="submit" class="button button-danger">Delete post</button>
                     </form>
-                {% endif %}
+                </div>
+            {% endif %}
 
-                <form method="POST" action="{{ url_for('add_reply', post_id=post._id) }}" class="post-info">
-                    <label for="content">Reply Content:</label>
-                    <input type="text" id="content" name="content">
+            <form method="POST" action="{{ url_for('add_reply', post_id=post._id) }}" class="card form">
+                <label for="content">Reply</label>
+                <input type="text" id="content" name="content" required
+                pattern=".*\S.*" title="Reply can't be empty.">
 
-                    <input type="hidden" name="post_id" value="{{ post._id }}">
+                <input type="hidden" name="post_id" value="{{ post._id }}">
 
-                    <button type="submit" class="submit-button">Post</button>
-                </form>
+                <button type="submit" class="button">Post</button>
+            </form>
 
-                <section class="post-feed">
-                    {% for reply in replies: %}
-                        <div class="post-card">
-                            <p>{{ reply.content }}</p>
-                        </div>
-                    {% else %}
-                        <p>No replies yet.</p>
-                    {% endfor %}
-                </section>
-            </div>
-        </div>
+            <section class="post-feed">
+                <h2 class="section-title">{% if is_owner %}Replies{% else %}Your replies{% endif %}</h2>
+                {% for reply in replies: %}
+                    <div class="card reply">
+                        <p>{{ reply.content }}</p>
+                    </div>
+                {% else %}
+                    {% if is_owner %}No replies yet.{% else %}Only you and the poster can see your replies.{% endif %}
+                {% endfor %}
+            </section>
+        </main>
     </body>
 </html>

@@ -1,122 +1,273 @@
-body{
-    background-color:rgb(82, 77, 77);
+/* Colors */
+:root {
+    --purple: #57068c;
+    --bg: #f7f5fa;
+    --text: #251b30;
+    --muted: #6b6172;
+    --border: #e8e1ed;
+    --input-border: #cfc6d6;
 }
 
-.white{
-    color:white;
+/* Box Base */
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: Arial, sans-serif; }
+a { color: var(--purple); }
+
+/* Shared Header */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: 20px 24px;
+    background: var(--purple);
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
 }
 
-.post-info{
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.header-button {
+    padding: 8px 14px;
+    border: 2px solid white;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.header-button:hover {
+    background: white;
+    color: var(--purple);
+}
+
+/* Shared Layout */
+.page {
+    max-width: 600px;
+    margin: 36px auto;
+    padding: 0 16px;
+}
+
+.card {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgb(50 20 70 / 6%);
+}
+
+.eyebrow {
+    color: var(--purple);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.empty {
+    color: var(--muted);
+    text-align: center;
+}
+
+/* Shared Forms */
+.form label {
+    display: block;
+    margin: 18px 0 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form input,
+.input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: white;
+    font: inherit;
+}
+
+.form input:focus,
+.input:focus {
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+}
+
+.form .button {
+    width: 100%;
+    margin-top: 24px;
+}
+
+.form-note {
+    margin: 8px 0;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Shared Buttons */
+.button {
+    display: inline-block;
+    padding: 15px;
+    border: 2px solid var(--purple);
+    border-radius: 8px;
+    background: var(--purple);
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background: #45056f;
+    border-color: #45056f;
+}
+
+.button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.button-outline {
+    background: white;
+    color: var(--purple);
+}
+
+.button-outline:hover {
+    background: var(--bg);
+    border-color: var(--purple);
+}
+
+/* Auth Pages */
+.auth-card {
+    width: calc(100% - 32px);
+    max-width: 420px;
+    margin: 36px auto;
+    padding: 28px 24px;
+}
+
+.auth-card h1 {
+    margin: 14px 0 12px;
+    font-size: 32px;
+    line-height: 1.15;
+}
+
+.intro {
+    margin-bottom: 28px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.switch-page {
+    margin-top: 26px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.switch-page a {
+    font-weight: bold;
+}
+
+/* Home */
+.post-feed {
     display: flex;
     flex-direction: column;
-    color:white;
-    border:2px solid white;
-    border-radius:20px;
-    padding:20px;
-    gap:20px;
+    gap: 20px;
+    padding-bottom: 40px;
 }
 
-/* Home page */
-.home{
-    max-width:600px;
-    margin:0 auto;
-    padding:0 16px;
+.view {
+    color: inherit;
+    text-decoration: none;
 }
 
-.home-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    background-color:rgb(82, 77, 77);
-    border-bottom:2px solid white;
-    margin-bottom:20px;
-    z-index:1;
+.view:hover .post-card {
+    border-color: var(--purple);
+    box-shadow: 0 8px 28px rgb(87 6 140 / 15%);
 }
 
-.add-post-button, .back-button{
-    color:white;
-    text-decoration:none;
-    border:2px solid white;
-    border-radius:20px;
-    padding:8px 16px;
+.post-card h2 {
+    margin-top: 0;
 }
 
-.add-post-button:hover, .back-button:hover{
-    background-color:white;
-    color:rgb(82, 77, 77);
+.post-card p {
+    color: var(--muted);
+    line-height: 1.6;
 }
 
-.post-feed{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-    padding-bottom:40px;
+.post-card .last-seen {
+    margin-bottom: 0;
+    color: var(--purple);
+    font-style: italic;
 }
 
-.post-card{
-    color:white;
-    border:2px solid white;
-    border-radius:20px;
-    padding:20px;
+/* Post Pages */
+.form h1 {
+    margin: 0 0 4px;
+    font-size: 28px;
 }
 
-.post-card h2{
-    margin-top:0;
-}
-
-.last-seen{
-    font-style:italic;
-    margin-bottom:0;
-}
-
-/* Add post page */
-.add-post{
-    max-width:500px;
-    margin:0 auto;
-    padding:0 16px;
-}
-
-.add-post-header{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.submit-button{
-    background-color:white;
-    color:rgb(82, 77, 77);
-    font-weight:bold;
-    font-size:16px;
-    border:none;
-    border-radius:20px;
-    padding:10px;
-    cursor:pointer;
-}
-
-.submit-button:hover{
-    background-color:rgb(220, 220, 220);
-}
-
-.view{
-    color:white;
-}
-
-.view:hover .post-card{
-    background-color:rgb(220, 220, 220);
-    cursor:pointer;
-}
-
-.details{
+.details {
     display: flex;
     flex-direction: column;
-    gap:20px;
+    gap: 20px;
 }
 
-.search-bar{
-    padding: 20px;
-    border-radius:20px;
-    width:250px;
-    font-size:16px;
+.post-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.post-actions > * {
+    flex: 1;
+}
+
+.post-actions form {
+    margin: 0;
+}
+
+.post-actions .button {
+    width: 100%;
+}
+
+.button-danger {
+    border-color: #b42318;
+    background: white;
+    color: #b42318;
+}
+
+.button-danger:hover {
+    border-color: #b42318;
+    background: #b42318;
+    color: white;
+}
+
+.section-title {
+    margin: 12px 0 0;
+    font-size: 18px;
+}
+
+.reply p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.form-error {
+    margin: 0 0 8px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fdecea;
+    color: #b42318;
+    font-size: 14px;
 }

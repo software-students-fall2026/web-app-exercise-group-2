@@ -22,6 +22,7 @@ users.create_index("email", unique = True)
 
 login_manager = flask_login.LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = "login"
 
 class User(flask_login.UserMixin):
     pass
@@ -33,6 +34,9 @@ def load_user(user_id):
     except Exception:
         return None
 
+    if data is None:
+        return None
+    
     user = User()
     user.id = str(data["_id"])
     user.name = data["name"]
@@ -96,6 +100,7 @@ def login():
     return render_template("login.html")
         
 @app.route("/home")
+@flask_login.login_required
 def home():
     post = db.posts.find().sort("_id", -1)
     return render_template("home.html", posts=post)
@@ -131,15 +136,23 @@ def post():
 @flask_login.login_required
 def post_details(post_id):
     post = db.posts.find_one({"_id": ObjectId(post_id)})
-    replies = db.replies.find({"post_id": post_id})
+    is_owner = post.get("user_id") == str(flask_login.current_user.id)
 
-    return render_template("post_info.html", post=post, replies=replies)
+    if is_owner:
+        replies = db.replies.find({"post_id": post_id})
+    else:
+        replies = db.replies.find({"post_id": post_id, "user_id": str(flask_login.current_user.id)})
+
+    return render_template("post_info.html", post=post, replies=replies, is_owner=is_owner)
 
 
 @app.route("/add_reply/<post_id>", methods=["POST"])
 @flask_login.login_required
 def add_reply(post_id):
-    content = request.form["content"]
+    content = request.form["content"].strip()
+
+    if not content:
+        return redirect(url_for("post_details", post_id=post_id))
 
     db.replies.insert_one({
         "content": content,
