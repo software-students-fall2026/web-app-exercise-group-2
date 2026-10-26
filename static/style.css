@@ -98,3 +98,25 @@ body{
 .submit-button:hover{
     background-color:rgb(220, 220, 220);
 }
+
+.view{
+    color:white;
+}
+
+.view:hover .post-card{
+    background-color:rgb(220, 220, 220);
+    cursor:pointer;
+}
+
+.details{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.search-bar{
+    padding: 20px;
+    border-radius:20px;
+    width:250px;
+    font-size:16px;
+}
