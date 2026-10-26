@@ -8,24 +8,24 @@ Our goal is to create a centralized lost and found app for users to report losin
 
 ## User stories
 
-User stories are being tracked with github issues: https://github.com/software-students-fall2026/web-app-exercise-group-2/issues
+User stories are being tracked with github issues: [GitHub Issues](https://github.com/software-students-fall2026/web-app-exercise-group-2/issues)
 
 ## Steps necessary to run the software
 
-1. Prerequisites
+### 1. Prerequisites
 
-Python
-Git
-A MongoDB database like MongoDB atlas
+- Python
+- Git
+- A MongoDB database like MongoDB atlas
 
-2. Clone the Repo
+### 2. Clone the Repo
 
 ```bash
 git clone https://github.com/software-students-fall2026/web-app-exercise-group-2.git
 cd web-app-exercise-group-2
 ```
 
-3. Run the Setup Script
+### 3. Run the Setup Script
 
 Mac: 
 
@@ -39,7 +39,7 @@ Windows:
 python .automations/setup.py
 ```
 
-4. Create a virtual environment and install dependencies
+### 4. Create a virtual environment and install dependencies
 
 Mac:
 
@@ -57,12 +57,19 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-5. Configure environment variables
+### 5. Configure environment variables
 
 Create a file called `.env` in the root directory, Use `env.example` as a template:
 
+Mac:
+
 ```bash
 cp env.example .env
+```
+
+Windows:
+```bash
+copy env.example .env
 ```
 
 Fill in these values in .env:
@@ -73,7 +80,7 @@ Fill in these values in .env:
 | `MONGO_DBNAME` | Name of the Mongo database |
 | `SECRET_KEY` | a secret key used by Flask |
 
-6. Run the app
+### 6. Run the app
 
 Activate your virtual environment and run: 
 
@@ -83,7 +90,7 @@ python app.py
 
 and then go to: http://127.0.0.1:5000
 
-7. Create an account to use the app
+### 7. Create an account to use the app
 
 Create and log in with your account and you can create, delete, update, view and search lost and found posts or reply to other posts
 
@@ -98,4 +105,4 @@ Create and log in with your account and you can create, delete, update, view and
 
 ## Task boards
 
-https://github.com/orgs/software-students-fall2026/projects/5
+[Task Board](https://github.com/orgs/software-students-fall2026/projects/5)
