@@ -5,28 +5,32 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lost and Found</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
 
     <body>
-        <div class="add-post">
-            <header class="add-post-header">
-                <a href="{{ url_for('home') }}" class="back-button">&larr; Back</a>
-                <h1 class="white">Add a post</h1>
-            </header>
+        <header class="site-header">
+            <span>NYU Lost & Found</span>
+            <nav class="header-actions">
+                <a href="{{ url_for('home') }}" class="header-button">&larr; Back</a>
+            </nav>
+        </header>
 
-            <form class="post-info" action="{{ url_for('post') }}" method="POST">
-                <label for="post-title">Post title:</label>
+        <main class="page">
+            <form class="card form" action="{{ url_for('post') }}" method="POST">
+                <h1>Add a post</h1>
+
+                <label for="post-title">Post title</label>
                 <input type="text" id="post-title" name="title" placeholder="Title">
 
-                <label for="item-desc">Item description:</label>
+                <label for="item-desc">Item description</label>
                 <input type="text" id="item-desc" name="description" placeholder="Description">
 
-                <label for="last-seen">Last seen:</label>
+                <label for="last-seen">Last seen</label>
                 <input type="text" id="last-seen" name="last_seen" placeholder="Location/Date">
 
-                <button type="submit" class="submit-button">Post</button>
+                <button type="submit" class="button">Post</button>
             </form>
-        </div>
+        </main>
     </body>
 </html>
